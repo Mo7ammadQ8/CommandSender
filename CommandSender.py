@@ -14,20 +14,35 @@ for cmd in commands:
 
 y += 30
 
-# Buttons
-button_send_party = QtBind.createButton(gui, 'send_command_party_clicked', "Send Command to Party", 10, y)
-button_send_guild = QtBind.createButton(gui, 'send_command_guild_clicked', "Send Command to Guild", 140, y)
+# Mount type combobox
+mount_types = ['fellow', 'horse', 'pick', 'transport', 'wolf']
+cb_mount_types = QtBind.createCombobox(gui, 10, y+130, 150, 20)
+for mount_type in mount_types:
+    QtBind.append(gui, cb_mount_types, mount_type)
 
-# TextBox
+# Buttons
 tb_trace = QtBind.createLineEdit(gui, "", 10, y+40, 150, 20)
 tb_tp1 = QtBind.createLineEdit(gui, "", 10, y+70, 70, 20)
 tb_tp2 = QtBind.createLineEdit(gui, "", 90, y+70, 70, 20)
+tb_moveon = QtBind.createLineEdit(gui, "", 10, y+100, 150, 20)
+tb_radius = QtBind.createLineEdit(gui, "", 10, y+160, 150, 20)
+
+QtBind.createButton(gui, 'send_command_party_clicked', "Send Command to Party", 10, y)
+QtBind.createButton(gui, 'send_command_guild_clicked', "Send Command to Guild", 140, y)
 QtBind.createButton(gui, 'send_command_party_trace_clicked', "Trace (Party)", 170, y+40)
 QtBind.createButton(gui, 'send_command_guild_trace_clicked', "Trace (Guild)", 250, y+40)
 QtBind.createButton(gui, 'send_command_no_trace_party_clicked', "No Trace (Party)", 330, y+40)
 QtBind.createButton(gui, 'send_command_no_trace_guild_clicked', "No Trace (Guild)", 420, y+40)
 QtBind.createButton(gui, 'send_command_party_tp_clicked', "TP (Party)", 170, y+70)
 QtBind.createButton(gui, 'send_command_guild_tp_clicked', "TP (Guild)", 250, y+70)
+QtBind.createButton(gui, 'send_command_party_moveon_clicked', "MoveOn (Party)", 170, y+100)
+QtBind.createButton(gui, 'send_command_guild_moveon_clicked', "MoveOn (Guild)", 260, y+100)
+QtBind.createButton(gui, 'send_command_party_mount_clicked', "Mount (Party)", 170, y+130)
+QtBind.createButton(gui, 'send_command_guild_mount_clicked', "Mount (Guild)", 250, y+130)
+QtBind.createButton(gui, 'send_command_party_dismount_clicked', "Dismount (Party)", 330, y+130)
+QtBind.createButton(gui, 'send_command_guild_dismount_clicked', "Dismount (Guild)", 420, y+130)
+QtBind.createButton(gui, 'send_command_party_setradius_clicked', "SetRadius (Party)", 170, y+160)
+QtBind.createButton(gui, 'send_command_guild_setradius_clicked', "SetRadius (Guild)", 265, y+160)
 
 def send_command_party_clicked():
     cmd = QtBind.text(gui, cb_commands)
@@ -74,3 +89,51 @@ def send_command_guild_tp_clicked():
     if name1 and name2:
         phBotChat.Guild("TP " + name1 + "," + name2)
         log(f'[xControlSender] Sent [TP {name1},{name2}] command to guild')
+
+def send_command_party_moveon_clicked():
+    name = QtBind.text(gui, tb_moveon)
+    if name:
+        phBotChat.Party("MOVEON " + name)
+        log('[xControlSender] Sent [MOVEON ' + name + '] command to party')
+
+def send_command_guild_moveon_clicked():
+    name = QtBind.text(gui, tb_moveon)
+    if name:
+        phBotChat.Guild("MOVEON " + name)
+        log('[xControlSender] Sent [MOVEON ' + name + '] command to guild')
+
+def send_command_party_mount_clicked():
+    mount_type = QtBind.text(gui, cb_mount_types)
+    if mount_type:
+        phBotChat.Party("MOUNT " + mount_type)
+        log('[xControlSender] Sent [MOUNT ' + mount_type + '] command to party')
+
+def send_command_guild_mount_clicked():
+    mount_type = QtBind.text(gui, cb_mount_types)
+    if mount_type:
+        phBotChat.Guild("MOUNT " + mount_type)
+        log('[xControlSender] Sent [MOUNT ' + mount_type + '] command to guild')
+
+def send_command_party_dismount_clicked():
+    mount_type = QtBind.text(gui, cb_mount_types)
+    if mount_type:
+        phBotChat.Party("DISMOUNT " + mount_type)
+        log('[xControlSender] Sent [MOUNT ' + mount_type + '] command to party')
+
+def send_command_guild_dismount_clicked():
+    mount_type = QtBind.text(gui, cb_mount_types)
+    if mount_type:
+        phBotChat.Guild("DISMOUNT " + mount_type)
+        log('[xControlSender] Sent [MOUNT ' + mount_type + '] command to guild')
+
+def send_command_party_setradius_clicked():
+    radius = QtBind.text(gui, tb_radius)
+    if radius:
+        phBotChat.Party("SETRADIUS " + radius)
+        log('[xControlSender] Sent [SETRADIUS ' + radius + '] command to party')
+
+def send_command_guild_setradius_clicked():
+    radius = QtBind.text(gui, tb_radius)
+    if radius:
+        phBotChat.Guild("SETRADIUS " + radius)
+        log('[xControlSender] Sent [SETRADIUS ' + radius + '] command to guild')
