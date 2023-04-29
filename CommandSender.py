@@ -12,7 +12,7 @@ cb_commands = QtBind.createCombobox(gui, 10, y, 200, 20)
 for cmd in commands:
     QtBind.append(gui, cb_commands, cmd)
 
-y += 30
+y += 20
 
 # Mount type combobox
 mount_types = ['fellow', 'horse', 'pick', 'transport', 'wolf']
@@ -26,6 +26,9 @@ tb_tp1 = QtBind.createLineEdit(gui, "", 10, y+70, 70, 20)
 tb_tp2 = QtBind.createLineEdit(gui, "", 90, y+70, 70, 20)
 tb_moveon = QtBind.createLineEdit(gui, "", 10, y+100, 150, 20)
 tb_radius = QtBind.createLineEdit(gui, "", 10, y+160, 150, 20)
+tb_setscript = QtBind.createLineEdit(gui, "", 10, y+190, 150, 20)
+tb_setarea = QtBind.createLineEdit(gui, "", 10, y+220, 150, 20)
+tb_profile = QtBind.createLineEdit(gui, "", 10, y+250, 150, 20)
 
 QtBind.createButton(gui, 'send_command_party_clicked', "Send Command to Party", 10, y)
 QtBind.createButton(gui, 'send_command_guild_clicked', "Send Command to Guild", 140, y)
@@ -43,6 +46,13 @@ QtBind.createButton(gui, 'send_command_party_dismount_clicked', "Dismount (Party
 QtBind.createButton(gui, 'send_command_guild_dismount_clicked', "Dismount (Guild)", 420, y+130)
 QtBind.createButton(gui, 'send_command_party_setradius_clicked', "SetRadius (Party)", 170, y+160)
 QtBind.createButton(gui, 'send_command_guild_setradius_clicked', "SetRadius (Guild)", 265, y+160)
+QtBind.createButton(gui, 'send_command_party_setscript_clicked', "SetScript (Party)", 170, y+190)
+QtBind.createButton(gui, 'send_command_guild_setscript_clicked', "SetScript (Guild)", 265, y+190)
+QtBind.createButton(gui, 'send_command_party_setarea_clicked', "SetArea (Party)", 170, y+220)
+QtBind.createButton(gui, 'send_command_guild_setarea_clicked', "SetArea (Guild)", 265, y+220)
+QtBind.createButton(gui, 'send_command_party_profile_clicked', "Profile (Party)", 170, y+250)
+QtBind.createButton(gui, 'send_command_guild_profile_clicked', "Profile (Guild)", 250, y+250)
+
 
 def send_command_party_clicked():
     cmd = QtBind.text(gui, cb_commands)
@@ -137,3 +147,39 @@ def send_command_guild_setradius_clicked():
     if radius:
         phBotChat.Guild("SETRADIUS " + radius)
         log('[xControlSender] Sent [SETRADIUS ' + radius + '] command to guild')
+
+def send_command_party_setscript_clicked():
+    script = QtBind.text(gui, tb_setscript)
+    if script:
+        phBotChat.Party("SETSCRIPT " + script)
+        log('[xControlSender] Sent [SETSCRIPT ' + script + '] command to party')
+
+def send_command_guild_setscript_clicked():
+    script = QtBind.text(gui, tb_setscript)
+    if script:
+        phBotChat.Guild("SETSCRIPT " + script)
+        log('[xControlSender] Sent [SETSCRIPT ' + script + '] command to guild')
+
+def send_command_party_setarea_clicked():
+    area = QtBind.text(gui, tb_setarea)
+    if area:
+        phBotChat.Party("SETAREA " + area)
+        log('[xControlSender] Sent [SETAREA ' + area + '] command to party')
+
+def send_command_guild_setarea_clicked():
+    area = QtBind.text(gui, tb_setarea)
+    if area:
+        phBotChat.Guild("SETAREA " + area)
+        log('[xControlSender] Sent [SETAREA ' + area + '] command to guild')
+
+def send_command_party_profile_clicked():
+    profile = QtBind.text(gui, tb_profile)
+    if profile:
+        phBotChat.Party("PROFILE " + profile)
+        log('[xControlSender] Sent [PROFILE ' + profile + '] command to party')
+
+def send_command_guild_profile_clicked():
+    profile = QtBind.text(gui, tb_profile)
+    if profile:
+        phBotChat.Guild("PROFILE " + profile)
+        log('[xControlSender] Sent [PROFILE ' + profile + '] command to guild')
