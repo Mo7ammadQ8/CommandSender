@@ -2,9 +2,12 @@ from phBot import *
 import phBotChat
 import QtBind
  
- 
+pName = 'ControlHelper'
+pVersion = '1.0.2'
+pUrl = 'https://raw.githubusercontent.com/Mo7ammadQ8/CommandSender/main/CommandSender.py'
+
 # GUI
-gui = QtBind.init(__name__, 'ControlHelper')
+gui = QtBind.init(__name__,pName)
 y = 10
  
 # Add a ComboBox for commands
@@ -293,4 +296,5 @@ def send_command_guild_reverse_clicked():
         phBotChat.Guild("REVERSE " + reverse_type + " " + (reverse_player_or_zone or ''))
         log(f'[ControlHelper] Sent [REVERSE {reverse_type} {reverse_player_or_zone or ""}] command to guild')
 
-
+# Plugin loaded
+log("Plugin: "+pName+" v"+pVersion+" successfully loaded")
