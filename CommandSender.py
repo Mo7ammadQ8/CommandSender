@@ -83,6 +83,8 @@ QtBind.createButton(gui, 'send_command_party_follow_clicked'    , "   EQUIP (Par
 QtBind.createButton(gui, 'send_command_guild_follow_clicked'    , "   EQUIP (Guild)    ", 620, y+175)
 QtBind.createButton(gui, 'send_command_no_follow_party_clicked' , " UNEQUIP (Party) ", 520, y+200)
 QtBind.createButton(gui, 'send_command_no_follow_guild_clicked' , " UNEQUIP (Guild) ", 620, y+200)
+QtBind.createButton(gui, 'send_command_party_reverse_clicked' , " REVERSE (Party) ", 520, y+245)
+QtBind.createButton(gui, 'send_command_guild_reverse_clicked' , " REVERSE (Guild) ", 620, y+245)
  
  
 def send_command_party_clicked():
@@ -248,3 +250,19 @@ def send_command_guild_cape_clicked():
     if cape:
         phBotChat.Guild("CAPE " + cape)
         log('[xControlSender] Sent [CAPE ' + cape + '] command to guild')
+
+def send_command_party_reverse_clicked():
+    reverse_type = QtBind.text(gui, cb_reverse_types)
+    reverse_player_or_zone = QtBind.text(gui, tb_reverse)
+    if reverse_type:
+        phBotChat.Party("REVERSE " + reverse_type + " " + (reverse_player_or_zone or ''))
+        log(f'[xControlSender] Sent [REVERSE {reverse_type} {reverse_player_or_zone or ""}] command to party')
+
+def send_command_guild_reverse_clicked():
+    reverse_type = QtBind.text(gui, cb_reverse_types)
+    reverse_player_or_zone = QtBind.text(gui, tb_reverse)
+    if reverse_type:
+        phBotChat.Guild("REVERSE " + reverse_type + " " + (reverse_player_or_zone or ''))
+        log(f'[xControlSender] Sent [REVERSE {reverse_type} {reverse_player_or_zone or ""}] command to guild')
+
+
