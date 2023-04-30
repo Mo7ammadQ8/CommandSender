@@ -3,11 +3,13 @@ import phBotChat
 import QtBind
  
 pName = 'ControlHelper'
-pVersion = '1.0.2'
+pVersion = '1.0.3'
 pUrl = 'https://raw.githubusercontent.com/Mo7ammadQ8/CommandSender/main/CommandSender.py'
 
 # GUI
 gui = QtBind.init(__name__,pName)
+QtBind.createLabel(gui,'* Make Sure to have xControl Plugin Installed',400,10)
+QtBind.createLabel(gui,'- Working Perfectly With xControl v.1.9.1',400,25)
 y = 10
  
 # Add a ComboBox for commands
